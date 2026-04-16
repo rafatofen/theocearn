@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ocearn — Villa Kerobokan, Bali</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --cream:   #FAF8F5;
+  --white:   #FFFFFF;
+  --linen:   #F0EBE3;
+  --stone:   #C4B8A8;
+  --warm:    #8C7B68;
+  --deep:    #2C2620;
+  --mid:     #5A5148;
+  --accent:  #7A6A58;
+  --gold:    #B09A7A;
+  --border:  rgba(140,123,104,0.18);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--deep);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ─── PAGES ─── */
+.page { display: none; min-height: 100vh; }
+.page.active { display: block; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 56px;
+  height: 72px;
+  background: rgba(250,248,245,0.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.4s, border-color 0.4s;
+}
+nav.on-hero {
+  background: transparent;
+  border-bottom-color: transparent;
+}
+nav.on-hero .nav-logo { color: #fff; }
+nav.on-hero .nav-links a { color: rgba(255,255,255,0.72); }
+nav.on-hero .nav-links a:hover { color: #fff; }
+nav.on-hero .nav-links .nav-cta a { border-color: rgba(255,255,255,0.5); color: #fff; }
+nav.on-hero .hamburger span { background: #fff; }
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--deep);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  background: none;
+  border: none;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  align-items: center;
+}
+.nav-links a {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color 0.3s;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+}
+.nav-links a:hover { color: var(--deep); }
+.nav-links .nav-cta a {
+  padding: 9px 20px;
+  border: 1px solid var(--border);
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+.nav-links .nav-cta a:hover { background: var(--deep); color: var(--cream); border-color: var(--deep); }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+  z-index: 300;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--deep);
+  transition: transform 0.35s, opacity 0.35s, background 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--cream);
+  z-index: 250;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--deep);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  background: none;
+  border: none;
+}
+.mobile-menu a:hover { color: var(--warm); }
+.mobile-menu .m-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 300;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-top: -16px;
+}
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+.hero-slides { position: absolute; inset: 0; }
+.hero-slide {
+  position: absolute; inset: 0;
+  opacity: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 1.6s cubic-bezier(.4,0,.2,1);
+}
+.hero-slide.active { opacity: 1; }
+.hero-slide::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(30,25,20,0.18) 0%,
+    rgba(30,25,20,0.04) 35%,
+    rgba(30,25,20,0.58) 100%
+  );
+}
+.hero-content {
+  position: absolute;
+  bottom: 80px; left: 56px;
+  z-index: 2;
+}
+.hero-eyebrow {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.62);
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.3s forwards;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 9vw, 7.5rem);
+  font-weight: 300;
+  line-height: 0.88;
+  color: #fff;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.5s forwards;
+}
+.hero-title em { font-style: italic; color: rgba(255,255,255,0.78); }
+.hero-sub {
+  font-size: 0.68rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-top: 20px;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.75s forwards;
+}
+.hero-cta {
+  position: absolute;
+  bottom: 80px; right: 56px;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeUp 0.9s 1s forwards;
+}
+.btn-ghost-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 30px;
+  border: 1px solid rgba(255,255,255,0.55);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 300;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.07);
+  transition: background 0.3s, border-color 0.3s;
+}
+.btn-ghost-white:hover { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.9); }
+.hero-dots {
+  position: absolute;
+  bottom: 36px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 8px; z-index: 2;
+}
+.hdot {
+  width: 20px; height: 1px;
+  background: rgba(255,255,255,0.28);
+  transition: width 0.4s, background 0.4s;
+  cursor: pointer;
+}
+.hdot.active { width: 44px; background: rgba(255,255,255,0.9); }
+
+/* ─── STATS ─── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  border-bottom: 1px solid var(--border);
+}
+.stat {
+  padding: 36px 44px;
+  border-right: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s, transform 0.6s;
+}
+.stat:last-child { border-right: none; }
+.stat.vis { opacity: 1; transform: none; }
+.stat-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--deep);
+  line-height: 1;
+  margin-bottom: 5px;
+}
+.stat-l {
+  font-size: 0.58rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+/* ─── ABOUT ─── */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 580px;
+}
+.about-img { overflow: hidden; position: relative; }
+.about-img img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 6s; }
+.about-img:hover img { transform: scale(1.04); }
+.about-copy {
+  padding: 88px 72px;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.eyebrow {
+  display: block;
+  font-size: 0.58rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.9rem, 3.2vw, 3rem);
+  font-weight: 300;
+  line-height: 1.06;
+  color: var(--deep);
+  margin-bottom: 26px;
+}
+.section-title em { font-style: italic; color: var(--warm); }
+.divider { width: 36px; height: 1px; background: var(--gold); margin-bottom: 28px; }
+.body-text {
+  font-size: 0.93rem;
+  line-height: 1.9;
+  color: var(--mid);
+  max-width: 400px;
+  margin-bottom: 14px;
+}
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--warm);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  margin-top: 16px;
+  width: fit-content;
+}
+.status-dot { width:6px; height:6px; border-radius:50%; background:#e8a040; flex-shrink:0; }
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 26px;
+  border: 1px solid var(--deep);
+  color: var(--deep);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  margin-top: 28px;
+  transition: background 0.3s, color 0.3s;
+  width: fit-content;
+}
+.btn-outline:hover { background: var(--deep); color: var(--cream); }
+
+/* ─── AMENITIES CAROUSEL ─── */
+.amenities-section { padding: 96px 0; background: var(--cream); overflow: hidden; }
+.amenities-header {
+  padding: 0 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
+}
+.carousel-nav { display: flex; gap: 8px; }
+.cnav-btn {
+  width: 44px; height: 44px;
+  border: 1px solid var(--border);
+  background: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--mid); font-size: 1rem;
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+.cnav-btn:hover { background: var(--deep); border-color: var(--deep); color: #fff; }
+.carousel-wrap { padding: 0 56px; overflow: hidden; }
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.6s cubic-bezier(.4,0,.2,1);
+}
+.amenity-card {
+  flex: 0 0 calc(33.33% - 14px);
+  background: var(--white);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.amenity-img {
+  width: 100%; aspect-ratio: 4/3;
+  object-fit: cover; display: block;
+  transition: transform 0.6s;
+}
+.amenity-card:hover .amenity-img { transform: scale(1.04); }
+.amenity-info { padding: 22px 26px 28px; }
+.amenity-name {
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--deep);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.amenity-desc { font-size: 0.84rem; line-height: 1.65; color: var(--mid); }
+.carousel-dots { display: flex; gap: 6px; padding: 24px 56px 0; }
+.cdot {
+  width: 20px; height: 1px;
+  background: var(--stone);
+  cursor: pointer;
+  transition: width 0.3s, background 0.3s;
+}
+.cdot.active { width: 44px; background: var(--deep); }
+
+/* ─── GALLERY PREVIEW ─── */
+.gallery-preview { background: var(--linen); }
+.gp-inner { display: grid; grid-template-columns: 1fr 1fr; }
+.gp-left {
+  padding: 88px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.gp-count {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5.5rem;
+  font-weight: 300;
+  color: var(--linen);
+  line-height: 1;
+  filter: brightness(0.88);
+  opacity: 0.5;
+  display: block;
+  margin-bottom: -10px;
+}
+.gp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3px;
+  min-height: 480px;
+}
+.gp-grid div { overflow: hidden; }
+.gp-grid img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.6s; }
+.gp-grid div:hover img { transform: scale(1.06); }
+
+/* ─── LOCATION ─── */
+.location-section { padding: 96px 56px; background: var(--white); }
+.location-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  align-items: start;
+}
+.loc-map iframe {
+  width: 100%; height: 440px;
+  display: block; border: none;
+  filter: sepia(0.12) contrast(0.95);
+}
+.loc-address {
+  font-size: 0.78rem;
+  letter-spacing: 0.07em;
+  color: var(--mid);
+  line-height: 1.9;
+  margin: 22px 0;
+}
+.nearby-lbl {
+  display: block;
+  font-size: 0.58rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 22px 0 10px;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 13px;
+  border: 1px solid var(--border);
+  color: var(--mid);
+  transition: border-color 0.3s, color 0.3s;
+}
+.tag:hover { border-color: var(--warm); color: var(--warm); }
+
+/* ─── ENQUIRY ─── */
+.enquiry-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.enq-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://content5.gillesdemunter.com/1027/listing_1027_1721475582_2373.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.25) saturate(0.7);
+}
+.enq-content {
+  position: relative; z-index: 2;
+  text-align: center;
+  padding: 0 24px;
+}
+.enq-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 300;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.enq-title em { font-style: italic; color: rgba(196,184,168,0.8); }
+.enq-sub {
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(196,184,168,0.5);
+  margin-bottom: 36px;
+}
+.enq-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(196,184,168,0.5);
+  border: 1px solid rgba(196,184,168,0.18);
+  padding: 8px 18px;
+  margin-bottom: 36px;
+}
+.enq-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #e8a040;
+}
+.btn-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 17px 42px;
+  background: var(--cream);
+  color: var(--deep);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.64rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 400;
+  transition: background 0.3s;
+}
+.btn-main:hover { background: var(--linen); }
+
+/* ─── FOOTER ─── */
+footer {
+  padding: 48px 56px;
+  background: var(--deep);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.foot-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+.foot-links { display: flex; gap: 28px; list-style: none; }
+.foot-links a {
+  font-size: 0.58rem; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(196,184,168,0.35);
+  text-decoration: none; cursor: pointer;
+  transition: color 0.3s;
+}
+.foot-links a:hover { color: var(--stone); }
+.foot-copy { font-size: 0.57rem; letter-spacing: 0.1em; color: rgba(196,184,168,0.25); text-transform: uppercase; }
+
+/* ─── GALLERY PAGE ─── */
+#galleryPage { background: var(--cream); padding-top: 72px; }
+.gp-hero {
+  position: relative;
+  height: 52vh; min-height: 360px;
+  display: flex; align-items: flex-end; overflow: hidden;
+}
+.gp-hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://content3.gillesdemunter.com/1027/listing_1027_1721523494_1969.jpg');
+  background-size: cover; background-position: center;
+  filter: brightness(0.4);
+}
+.gp-hero-txt {
+  position: relative; z-index: 2;
+  padding: 0 56px 52px;
+}
+.gp-hero-txt h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 300; color: #fff; line-height: 1;
+}
+.gp-hero-txt h1 em { font-style: italic; color: rgba(255,255,255,0.65); }
+.back-bar {
+  padding: 22px 56px;
+  border-bottom: 1px solid var(--border);
+}
+.back-btn {
+  background: none; border: none; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.6rem; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--mid);
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0; transition: color 0.3s;
+}
+.back-btn:hover { color: var(--deep); }
+
+.gsb { padding: 72px 56px; border-bottom: 1px solid var(--border); }
+.gsb:last-of-type { border-bottom: none; }
+.gsb.bg-white { background: var(--white); }
+.gsb-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 32px;
+}
+.gsb-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem; font-weight: 300; color: var(--deep); line-height: 1;
+}
+.gsb-title em { font-style: italic; color: var(--warm); }
+.gsb-ct { font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--stone); }
+
+.gg { display: grid; gap: 4px; }
+.gg.c2 { grid-template-columns: 1fr 1fr; }
+.gg.c3 { grid-template-columns: repeat(3,1fr); }
+.gg.c4 { grid-template-columns: repeat(4,1fr); }
+.gg.mx { grid-template-columns: 7fr 5fr; }
+.gg.mx2 { grid-template-columns: 5fr 7fr; }
+.gg.c2 .gi { aspect-ratio: 3/2; }
+.gg.c3 .gi { aspect-ratio: 4/3; }
+.gg.c4 .gi { aspect-ratio: 4/3; }
+.gg.mx .gi:first-child { aspect-ratio: 16/10; }
+.gg.mx .gi:last-child  { aspect-ratio: 3/4; }
+.gg.mx2 .gi:first-child { aspect-ratio: 3/4; }
+.gg.mx2 .gi:last-child  { aspect-ratio: 16/10; }
+
+.gi { overflow: hidden; position: relative; cursor: pointer; }
+.gi img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.6s cubic-bezier(.25,.46,.45,.94); }
+.gi:hover img { transform: scale(1.05); }
+.gi .ov { position:absolute; inset:0; background:rgba(44,38,32,0); display:flex; align-items:center; justify-content:center; transition: background 0.4s; }
+.gi:hover .ov { background: rgba(44,38,32,0.18); }
+.ov-plus {
+  width: 38px; height: 38px;
+  border: 1px solid rgba(255,255,255,0);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0); font-size: 1.1rem;
+  transition: all 0.4s;
+}
+.gi:hover .ov-plus { border-color: rgba(255,255,255,0.8); color: rgba(255,255,255,0.9); }
+
+.row-gap { margin-bottom: 4px; }
+
+/* ─── LIGHTBOX ─── */
+.lightbox {
+  display: none; position: fixed; inset: 0;
+  z-index: 1000;
+  background: rgba(18,14,11,0.97);
+  align-items: center; justify-content: center; flex-direction: column;
+}
+.lightbox.open { display: flex; }
+.lb-img { max-width: 86vw; max-height: 78vh; object-fit: contain; }
+.lb-close {
+  position: absolute; top: 24px; right: 30px;
+  background: none; border: none;
+  color: rgba(196,184,168,0.55);
+  font-size: 0.62rem; letter-spacing: 0.24em;
+  text-transform: uppercase; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; transition: color 0.3s;
+}
+.lb-close:hover { color: var(--cream); }
+.lb-nav { display: flex; gap: 10px; margin-top: 18px; }
+.lb-btn {
+  background: none; border: 1px solid rgba(196,184,168,0.18);
+  color: rgba(196,184,168,0.55); padding: 8px 18px;
+  font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.3s;
+}
+.lb-btn:hover { border-color: var(--cream); color: var(--cream); }
+.lb-ct { font-size: 0.58rem; letter-spacing: 0.22em; color: rgba(196,184,168,0.3); margin-top: 12px; font-family: 'DM Sans', sans-serif; }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s, transform 0.7s; }
+.reveal.vis { opacity: 1; transform: none; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 960px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .hero-content { left: 24px; bottom: 60px; }
+  .hero-cta { display: none; }
+
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat:nth-child(2) { border-right: none; }
+
+  .about { grid-template-columns: 1fr; }
+  .about-img { aspect-ratio: 16/9; }
+  .about-copy { padding: 48px 24px; }
+
+  .amenities-section { padding: 60px 0; }
+  .amenities-header { padding: 0 24px; }
+  .carousel-wrap { padding: 0 24px; }
+  .amenity-card { flex: 0 0 78vw; }
+  .carousel-dots { padding: 18px 24px 0; }
+
+  .gp-inner { grid-template-columns: 1fr; }
+  .gp-left { padding: 56px 24px; order: 2; }
+  .gp-grid { min-height: 300px; order: 1; }
+
+  .location-section { padding: 60px 24px; }
+  .location-inner { grid-template-columns: 1fr; gap: 36px; }
+
+  footer { padding: 36px 24px; flex-direction: column; align-items: flex-start; }
+
+  .gp-hero-txt { padding: 0 24px 40px; }
+  .back-bar { padding: 18px 24px; }
+  .gsb { padding: 48px 24px; }
+  .gg.c3, .gg.c4 { grid-template-columns: 1fr 1fr; }
+  .gg.mx, .gg.mx2 { grid-template-columns: 1fr; }
+  .gg.mx .gi:first-child, .gg.mx .gi:last-child,
+  .gg.mx2 .gi:first-child, .gg.mx2 .gi:last-child { aspect-ratio: 16/9; }
+  .gsb-head { flex-direction: column; align-items: flex-start; gap: 4px; }
+}
+@media (max-width: 540px) {
+  .gg.c2, .gg.c3, .gg.c4 { grid-template-columns: 1fr; }
+  .gg.c2 .gi, .gg.c3 .gi, .gg.c4 .gi { aspect-ratio: 16/9; }
+  .stat { padding: 22px 20px; }
+  .stat-n { font-size: 2.4rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav" class="on-hero">
+  <button class="nav-logo" onclick="showPage('home')">The Ocearn</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about" onclick="showPage('home')">About</a></li>
+    <li><a href="#amenities" onclick="showPage('home')">Amenities</a></li>
+    <li><a href="#location" onclick="showPage('home')">Location</a></li>
+    <li><a onclick="showPage('gallery')">The Villa</a></li>
+    <li class="nav-cta"><a href="#enquiry" onclick="showPage('home')">Enquire</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="showPage('home');closeMenu()">About</a>
+  <a href="#amenities" onclick="showPage('home');closeMenu()">Amenities</a>
+  <a href="#location" onclick="showPage('home');closeMenu()">Location</a>
+  <a onclick="showPage('gallery');closeMenu()">The Villa</a>
+  <a href="#enquiry" onclick="showPage('home');closeMenu()">Enquire</a>
+  <span class="m-sub">Kerobokan · Bali · Indonesia</span>
+</div>
+
+<!-- ══════════════ HOME ══════════════ -->
+<div class="page active" id="homePage">
+
+  <section class="hero">
+    <div class="hero-slides">
+      <div class="hero-slide active" style="background-image:url('https://content5.gillesdemunter.com/1027/listing_1027_1721475427_3847.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('https://content5.gillesdemunter.com/1027/listing_1027_1721523494_1969.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('https://content5.gillesdemunter.com/1027/listing_1027_1721475582_2373.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('https://content1.gillesdemunter.com/1027/listing_1027_1721474980_2937.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('https://content1.gillesdemunter.com/1027/listing_1027_1721472880_1430.jpg')"></div>
+    </div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Kerobokan · Bali, Indonesia</span>
+      <h1 class="hero-title">The<br><em>Ocearn</em></h1>
+      <p class="hero-sub">Modern Glass Villa &nbsp;·&nbsp; 5 Bedrooms &nbsp;·&nbsp; 720 m²</p>
+    </div>
+    <div class="hero-cta">
+      <a href="#enquiry" class="btn-ghost-white">Make an Enquiry</a>
+    </div>
+    <div class="hero-dots" id="heroDots"></div>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-n">5</div><div class="stat-l">Bedrooms &amp; Baths</div></div>
+    <div class="stat"><div class="stat-n">720</div><div class="stat-l">Land Area m²</div></div>
+    <div class="stat"><div class="stat-n">470</div><div class="stat-l">Living Area m²</div></div>
+    <div class="stat"><div class="stat-n">2023</div><div class="stat-l">Year Built</div></div>
+  </div>
+
+  <section class="about" id="about">
+    <div class="about-img">
+      <img src="https://content1.gillesdemunter.com/1027/listing_1027_1721523468_2959.jpg" alt="The Ocearn Interior">
+    </div>
+    <div class="about-copy">
+      <span class="eyebrow">About the Villa</span>
+      <h2 class="section-title">Where glass meets<br><em>tropical living</em></h2>
+      <div class="divider"></div>
+      <p class="body-text">Built in 2023 in the serene pocket of Kerobokan, The Ocearn is a fully glazed contemporary villa where architecture dissolves the boundary between inside and out. Polished cement floors, double-height ceilings, and floor-to-ceiling glass panels frame the tropical landscape in every direction.</p>
+      <p class="body-text">Two levels. Five private suites. A chef's kitchen, entertainment room with pool table and bar, expansive pools, and private parking — all within walking distance of Bali's finest cafés and coastline.</p>
+      <span class="status-chip"><span class="status-dot"></span>Currently rented · Available from September</span>
+      <button class="btn-outline" onclick="showPage('gallery')">Explore the Villa →</button>
+    </div>
+  </section>
+
+  <!-- AMENITIES CAROUSEL -->
+  <section class="amenities-section" id="amenities">
+    <div class="amenities-header">
+      <div>
+        <span class="eyebrow">Spaces &amp; Features</span>
+        <h2 class="section-title" style="font-size:clamp(1.8rem,2.8vw,2.6rem)">Life at <em>The Ocearn</em></h2>
+      </div>
+      <div class="carousel-nav">
+        <button class="cnav-btn" id="cPrev">&#8592;</button>
+        <button class="cnav-btn" id="cNext">&#8594;</button>
+      </div>
+    </div>
+    <div class="carousel-wrap">
+      <div class="carousel-track" id="cTrack">
+        <div class="amenity-card">
+          <img class="amenity-img" src="https://content5.gillesdemunter.com/1027/listing_1027_1721475427_3847.jpg" alt="Master Suite">
+          <div class="amenity-info">
+            <div class="amenity-name">Master Suite</div>
+            <div class="amenity-desc">Expansive en-suite bedroom with floor-to-ceiling glass opening directly to the tropical garden and pool area.</div>
+          </div>
+        </div>
+        <div class="amenity-card">
+          <img class="amenity-img" src="https://content3.gillesdemunter.com/1027/listing_1027_1721475582_2373.jpg" alt="Open Living">
+          <div class="amenity-info">
+            <div class="amenity-name">Open Living</div>
+            <div class="amenity-desc">Double-height ceilings and fully glazed walls blur the line between interior and lush Kerobokan surroundings.</div>
+          </div>
+        </div>
+        <div class="amenity-card">
+          <img class="amenity-img" src="https://content3.gillesdemunter.com/1027/listing_1027_1721523494_1969.jpg" alt="Swimming Pool">
+          <div class="amenity-info">
+            <div class="amenity-name">Swimming Pool</div>
+            <div class="amenity-desc">Private pool and plunge pool set within manicured grounds. Built for long Bali evenings and morning swims.</div>
+          </div>
+        </div>
+        <div class="amenity-card">
+          <img class="amenity-img" src="https://content5.gillesdemunter.com/1027/listing_1027_1721475515_6761.jpg" alt="Chef's Kitchen">
+          <div class="amenity-info">
+            <div class="amenity-name">Chef's Kitchen</div>
+            <div class="amenity-desc">Fully equipped with professional stove, oven, and double fridge. Designed for serious cooking and entertaining.</div>
+          </div>
+        </div>
+        <div class="amenity-card">
+          <img class="amenity-img" src="https://content1.gillesdemunter.com/1027/listing_1027_1721475173_9238.jpg" alt="Bathrooms">
+          <div class="amenity-info">
+            <div class="amenity-name">Luxury Bathrooms</div>
+            <div class="amenity-desc">5.5 baths with bathtub, rain shower, and stone fixtures. Every bedroom has its own private en-suite.</div>
+          </div>
+        </div>
+        <div class="amenity-card">
+          <img class="amenity-img" src="https://content3.gillesdemunter.com/1027/listing_1027_1721475386_4538.jpg" alt="Entertainment Room">
+          <div class="amenity-info">
+            <div class="amenity-name">Entertainment Room</div>
+            <div class="amenity-desc">A full bar and pool table make this the heart of the house. Designed for entertaining long into the Bali night.</div>
+          </div>
+        </div>
+        <div class="amenity-card">
+          <img class="amenity-img" src="https://content1.gillesdemunter.com/1027/listing_1027_1721474820_8952.jpg" alt="Garden & Terraces">
+          <div class="amenity-info">
+            <div class="amenity-name">Garden &amp; Terraces</div>
+            <div class="amenity-desc">Lush tropical garden with covered terrace spaces for outdoor dining, lounging, and golden hour views.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-dots" id="cDots"></div>
+  </section>
+
+  <!-- GALLERY PREVIEW -->
+  <section class="gallery-preview">
+    <div class="gp-inner">
+      <div class="gp-left reveal">
+        <span class="gp-count">22</span>
+        <span class="eyebrow">Photo Gallery</span>
+        <h2 class="section-title">The full<br><em>visual story</em></h2>
+        <div class="divider"></div>
+        <p class="body-text">Every room, every corner, every detail — curated images from the villa's bedrooms, interiors, pool and grounds.</p>
+        <button class="btn-outline" onclick="showPage('gallery')">View All Rooms →</button>
+      </div>
+      <div class="gp-grid">
+        <div><img src="https://content3.gillesdemunter.com/1027/listing_1027_1721523452_4514.jpg" alt=""></div>
+        <div><img src="https://content1.gillesdemunter.com/1027/listing_1027_1721475231_2605.jpg" alt=""></div>
+        <div><img src="https://content3.gillesdemunter.com/1027/listing_1027_1721474889_7611.jpg" alt=""></div>
+        <div><img src="https://content3.gillesdemunter.com/1027/listing_1027_1721472810_5221.jpg" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section class="location-section" id="location">
+    <div class="location-inner">
+      <div class="reveal">
+        <span class="eyebrow">Location</span>
+        <h2 class="section-title">Kerobokan,<br><em>Bali</em></h2>
+        <div class="divider"></div>
+        <p class="loc-address">Jl. Bedugul No. Blok 28<br>Kerobokan Kelod, Kec. Kuta Utara<br>Kabupaten Badung, Bali 80361<br>Indonesia</p>
+        <span class="nearby-lbl">Beaches Nearby</span>
+        <div class="tags">
+          <span class="tag">Batu Belig</span><span class="tag">Echo Beach</span>
+          <span class="tag">Berawa</span><span class="tag">Petitenget</span>
+        </div>
+        <span class="nearby-lbl">Dining &amp; Cafés</span>
+        <div class="tags">
+          <span class="tag">Desa Kitsune</span><span class="tag">Kong</span>
+          <span class="tag">Mauri</span><span class="tag">Bokashi</span><span class="tag">Kanvaz</span>
+        </div>
+        <span class="nearby-lbl">Wellness &amp; Lifestyle</span>
+        <div class="tags">
+          <span class="tag">Finns</span><span class="tag">Potato Head</span>
+          <span class="tag">Deus Ex Machina</span><span class="tag">Desa Seni</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.393!2d115.1468!3d-8.6733!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23d7590b09e0f%3A0x1f0f82ec9c0b2a52!2sKerobokan%20Kelod%2C%20North%20Kuta%2C%20Badung%20Regency%2C%20Bali!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
+          allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="The Ocearn Location"
+          style="width:100%;height:440px;display:block;border:none;filter:sepia(0.12) contrast(0.95)">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENQUIRY -->
+  <section class="enquiry-section" id="enquiry">
+    <div class="enq-bg"></div>
+    <div class="enq-content reveal">
+      <span class="eyebrow" style="color:rgba(196,184,168,0.6)">Get in Touch</span>
+      <h2 class="enq-title">The <em>Ocearn</em><br>awaits</h2>
+      <p class="enq-sub">Yearly Rental &nbsp;·&nbsp; Available for Sale</p>
+      <div><span class="enq-status">Currently rented · Available from September 2025</span></div>
+      <a href="https://wa.me/YOURPHONENUMBER?text=Hello%2C%20I%27m%20interested%20in%20The%20Ocearn%20Villa%20in%20Kerobokan%2C%20Bali.%20Could%20you%20send%20me%20more%20details%3F" target="_blank" class="btn-main" style="margin-top:36px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.555 4.116 1.523 5.843L.057 23.5l5.815-1.524A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        Enquire via WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <span class="foot-logo">The Ocearn</span>
+    <ul class="foot-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#amenities">Amenities</a></li>
+      <li><a href="#location">Location</a></li>
+      <li><a onclick="showPage('gallery')">The Villa</a></li>
+    </ul>
+    <span class="foot-copy">© 2025 The Ocearn · Kerobokan, Bali</span>
+  </footer>
+
+</div>
+
+<!-- ══════════════ GALLERY PAGE ══════════════ -->
+<div class="page" id="galleryPage">
+
+  <div class="gp-hero">
+    <div class="gp-hero-bg"></div>
+    <div class="gp-hero-txt">
+      <span class="eyebrow" style="color:rgba(196,184,168,0.6);display:block;margin-bottom:14px">The Ocearn · Kerobokan, Bali</span>
+      <h1><em>The</em> Rooms<br>&amp; Spaces</h1>
+    </div>
+  </div>
+
+  <div class="back-bar">
+    <button class="back-btn" onclick="showPage('home')">← Back to Villa</button>
+  </div>
+
+  <!-- Bedrooms -->
+  <div class="gsb">
+    <div class="gsb-head">
+      <h2 class="gsb-title">The <em>Bedrooms</em></h2>
+      <span class="gsb-ct">5 Suites</span>
+    </div>
+    <div class="gg mx row-gap">
+      <div class="gi" data-src="https://content5.gillesdemunter.com/1027/listing_1027_1721475427_3847.jpg">
+        <img src="https://content3.gillesdemunter.com/1027/listing_1027_1721475427_3847.jpg" alt="Master Bedroom">
+        <div class="ov"><div class="ov-plus">+</div></div>
+      </div>
+      <div class="gi" data-src="https://content5.gillesdemunter.com/1027/listing_1027_1721475360_6041.jpg">
+        <img src="https://content3.gillesdemunter.com/1027/listing_1027_1721475386_4538.jpg" alt="Bedroom 2">
+        <div class="ov"><div class="ov-plus">+</div></div>
+      </div>
+    </div>
+    <div class="gg c3">
+      <div class="gi" data-src="https://content1.gillesdemunter.com/1027/listing_1027_1721475279_4605.jpg">
+        <img src="https://content3.gillesdemunter.com/1027/listing_1027_1721475279_4605.jpg" alt="Bedroom 3">
+        <div class="ov"><div class="ov-plus">+</div></div>
+      </div>
+      <div class="gi" data-src="https://content3.gillesdemunter.com/1027/listing_1027_1721475231_2605.jpg">
+        <img src="https://content1.gillesdemunter.com/1027/listing_1027_1721475231_2605.jpg" alt="Bedroom 4">
+        <div class="ov"><div class="ov-plus">+</div></div>
+      </div>
+      <div class="gi" data-src="https://content5.gillesdemunter.com/1027/listing_1027_1721475173_9238.jpg">
+        <img src="https://content1.gillesdemunter.com/1027/listing_1027_1721475173_9238.jpg" alt="Bedroom 5">
+        <div class="ov"><div class="ov-plus">+</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Living & Dining -->
+  <div class="gsb bg-white">
+    <div class="gsb-head">
+      <h2 class="gsb-title">Living &amp; <em>Dining</em></h2>
+      <span class="gsb-ct">Common Areas</span>
+    </div>
+    <div class="gg c2 row-gap">
+      <div class="gi" data-src="https://content5.gillesdemunter.com/1027/listing_1027_1721523468_2959.jpg">
+        <img src="https://content3.gillesdemunter.com/1027/listing_1027_1721523468_2959.jpg" alt="Living Area">
+        <div class="ov"><div class="ov-plus">+</div></div>
+      </div>
+      <div class="gi" data-src="https://content3.gillesdemunter.com/1027/listing_1027_1721523452_4514.jpg">
+        <img src="https://content1.gillesdemunter.com/1027/listing_1027_1721523452_4514.jpg" alt="Kitchen">
+        <div class="ov"><div class="ov-plus">+</div></div>
+      </div>
+    </div>
+    <div class="gg c3">
+      <div class="gi" data-src="https://content5.gillesdemunter.com/1027/listing_1027_1721475515_6761.jpg">
+        <img src="https://content1.gillesdemunter.com/1027/listing_1027_1721475515_6761.jpg" alt="Dining">
+        <div class="ov"><div class="ov-plus">+</div></div>
+      </div>
+      <div class="gi" data-src="https://content3.gillesdemunter.com/1027/listing_1027_1721475582_2373.jpg">
+        <img src="https://content1.gillesdemunter.com/1027/listing_1027_1721475582_2373.jpg" alt="Interior">
+        <div class="ov"><div class="ov-plus">+</div></div>
+      </div>
+      <div class="gi" data-src="https://content1.gillesdemunter.com/1027/listing_1027_1721475082_8088.jpg">
+        <img src="https://content3.gillesdemunter.com/1027/listing_1027_1721475082_8088.jpg" alt="Details">
+        <div class="ov"><div class="ov-plus">+</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pool & Exterior -->
+  <div class="gsb">
+    <div class="gsb-head">
+      <h2 class="gsb-title">Pool &amp; <em>Gardens</em></h2>
+      <span class="gsb-ct">Outdoor Spaces</span>
+    </div>
+    <div class="gg mx2 row-gap">
+      <div class="gi" data-src="https://content1.gillesdemunter.com/1027/listing_1027_1721475029_6579.jpg">
+        <img src="https://content3.gillesdemunter.com/1027/listing_1027_1721475029_6579.jpg" alt="Pool">
+        <div class="ov"><div class="ov-plus">+</div></div>
+      </div>
+      <div class="gi" data-src="https://content5.gillesdemunter.com/1027/listing_1027_1721523494_1969.jpg">
+        <img src="https://content3.gillesdemunter.com/1027/listing_1027_1721523494_1969.jpg" alt="Exterior">
+        <div class="ov"><div class="ov-plus">+</div></div>
+      </div>
+    </div>
+    <div class="gg c4">
+      <div class="gi" data-src="https://content3.gillesdemunter.com/1027/listing_1027_1721474980_2937.jpg">
+        <img src="https://content1.gillesdemunter.com/1027/listing_1027_1721474980_2937.jpg" alt="Garden">
+        <div class="ov"><div class="ov-plus">+</div></div>
+      </div>
+      <div class="gi" data-src="https://content3.gillesdemunter.com/1027/listing_1027_1721474889_7611.jpg">
+        <img src="https://content1.gillesdemunter.com/1027/listing_1027_1721474889_7611.jpg" alt="Terrace">
+        <div class="ov"><div class="ov-plus">+</div></div>
+      </div>
+      <div class="gi" data-src="https://content3.gillesdemunter.com/1027/listing_1027_1721474820_8952.jpg">
+        <img src="https://content1.gillesdemunter.com/1027/listing_1027_1721474820_8952.jpg" alt="Night Pool">
+        <div class="ov"><div class="ov-plus">+</div></div>
+      </div>
+      <div class="gi" data-src="https://content5.gillesdemunter.com/1027/listing_1027_1721474786_9171.jpg">
+        <img src="https://content1.gillesdemunter.com/1027/listing_1027_1721474786_9171.jpg" alt="Villa Night">
+        <div class="ov"><div class="ov-plus">+</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gallery CTA -->
+  <div style="padding:60px 56px;text-align:center;background:var(--linen);border-top:1px solid var(--border)">
+    <span class="eyebrow" style="display:block;text-align:center;margin-bottom:12px">Interested in The Ocearn?</span>
+    <h2 class="section-title" style="font-size:2rem;margin-bottom:24px;text-align:center">Make an <em>Enquiry</em></h2>
+    <a href="https://wa.me/YOURPHONENUMBER?text=Hello%2C%20I%27m%20interested%20in%20The%20Ocearn%20Villa.%20Could%20you%20send%20me%20more%20details%3F" target="_blank" class="btn-main" style="background:var(--deep);color:var(--cream);display:inline-flex">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.555 4.116 1.523 5.843L.057 23.5l5.815-1.524A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+      Get in Touch
+    </a>
+  </div>
+
+  <footer>
+    <span class="foot-logo">The Ocearn</span>
+    <ul class="foot-links">
+      <li><a onclick="showPage('home')">Home</a></li>
+      <li><a href="https://wa.me/YOURPHONENUMBER" target="_blank">Contact</a></li>
+    </ul>
+    <span class="foot-copy">© 2025 The Ocearn · Kerobokan, Bali</span>
+  </footer>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose">✕ Close</button>
+  <img class="lb-img" id="lbImg" src="" alt="">
+  <div class="lb-nav">
+    <button class="lb-btn" id="lbPrev">← Prev</button>
+    <button class="lb-btn" id="lbNext">Next →</button>
+  </div>
+  <span class="lb-ct" id="lbCt"></span>
+</div>
+
+<script>
+// ─── PAGE SWITCH
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(name === 'gallery' ? 'galleryPage' : 'homePage').classList.add('active');
+  window.scrollTo(0,0);
+  requestAnimationFrame(updateNav);
+}
+
+// ─── NAV STATE
+function updateNav() {
+  const nav = document.getElementById('mainNav');
+  const onHome = document.getElementById('homePage').classList.contains('active');
+  const atTop = window.scrollY < 60;
+  if(onHome && atTop) nav.classList.add('on-hero');
+  else nav.classList.remove('on-hero');
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+
+// ─── HAMBURGER
+function toggleMenu() {
+  const hb = document.getElementById('hamburger');
+  const mm = document.getElementById('mobileMenu');
+  hb.classList.toggle('open');
+  mm.classList.toggle('open');
+  document.body.style.overflow = mm.classList.contains('open') ? 'hidden' : '';
+}
+function closeMenu() {
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ─── HERO SLIDESHOW
+const slides = document.querySelectorAll('.hero-slide');
+const dotsWrap = document.getElementById('heroDots');
+let cur = 0;
+slides.forEach((_,i) => {
+  const d = document.createElement('div');
+  d.className = 'hdot' + (i===0?' active':'');
+  d.onclick = () => goSlide(i);
+  dotsWrap.appendChild(d);
+});
+function goSlide(n) {
+  slides[cur].classList.remove('active');
+  dotsWrap.children[cur].classList.remove('active');
+  cur = n;
+  slides[cur].classList.add('active');
+  dotsWrap.children[cur].classList.add('active');
+}
+setInterval(() => goSlide((cur+1) % slides.length), 5500);
+
+// ─── SCROLL REVEAL
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.stat, .reveal').forEach(el => io.observe(el));
+document.querySelectorAll('.stat').forEach((el,i) => el.style.transitionDelay = (i*0.1)+'s');
+
+// ─── CAROUSEL
+const cTrack = document.getElementById('cTrack');
+const cCards = cTrack.querySelectorAll('.amenity-card');
+const cDots = document.getElementById('cDots');
+let cIdx = 0;
+
+function visCount() { return window.innerWidth < 960 ? 1 : 3; }
+function maxIdx() { return Math.max(0, cCards.length - visCount()); }
+
+function buildCDots() {
+  cDots.innerHTML = '';
+  for(let i = 0; i <= maxIdx(); i++) {
+    const d = document.createElement('div');
+    d.className = 'cdot' + (i===cIdx?' active':'');
+    d.onclick = () => goCard(i);
+    cDots.appendChild(d);
+  }
+}
+function goCard(n) {
+  cIdx = Math.min(Math.max(n,0), maxIdx());
+  const w = cCards[0].offsetWidth + 20;
+  cTrack.style.transform = `translateX(-${cIdx * w}px)`;
+  cDots.querySelectorAll('.cdot').forEach((d,i) => d.classList.toggle('active', i===cIdx));
+}
+document.getElementById('cNext').onclick = () => goCard(cIdx < maxIdx() ? cIdx+1 : 0);
+document.getElementById('cPrev').onclick = () => goCard(cIdx > 0 ? cIdx-1 : maxIdx());
+window.addEventListener('resize', () => { cIdx=0; cTrack.style.transform=''; buildCDots(); });
+buildCDots();
+
+// ─── SMOOTH ANCHOR LINKS
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    const el = document.querySelector(id);
+    if(el) { e.preventDefault(); el.scrollIntoView({ behavior:'smooth', block:'start' }); }
+  });
+});
+
+// ─── LIGHTBOX
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCt = document.getElementById('lbCt');
+let lbItems = [], lbIdx = 0;
+
+function openLb(srcs, idx) {
+  lbItems = srcs; lbIdx = idx;
+  lbImg.src = lbItems[lbIdx];
+  lbCt.textContent = (lbIdx+1) + ' / ' + lbItems.length;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+function lbStep(dir) {
+  lbIdx = (lbIdx + dir + lbItems.length) % lbItems.length;
+  lbImg.src = lbItems[lbIdx];
+  lbCt.textContent = (lbIdx+1) + ' / ' + lbItems.length;
+}
+
+document.getElementById('lbClose').onclick = closeLb;
+document.getElementById('lbPrev').onclick = () => lbStep(-1);
+document.getElementById('lbNext').onclick = () => lbStep(1);
+lb.addEventListener('click', e => { if(e.target===lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if(!lb.classList.contains('open')) return;
+  if(e.key==='Escape') closeLb();
+  if(e.key==='ArrowLeft') lbStep(-1);
+  if(e.key==='ArrowRight') lbStep(1);
+});
+
+document.querySelectorAll('.gi').forEach((el,i) => {
+  el.addEventListener('click', () => {
+    const block = el.closest('.gsb');
+    const blockItems = Array.from(block.querySelectorAll('.gi'));
+    const srcs = blockItems.map(it => it.dataset.src || it.querySelector('img').src);
+    openLb(srcs, blockItems.indexOf(el));
+  });
+});
+</script>
+</body>
+</html>

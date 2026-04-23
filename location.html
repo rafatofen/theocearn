@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Location — Villa Ocearn, Kerobokan Bali</title>
+  <meta name="description" content="Villa Ocearn is located in Kerobokan Kelod, Bali — minutes from Canggu's best cafés, beach clubs, restaurants and wellness spots.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/main.css">
+  <style>
+    /* ── MAP + INFO SPLIT ── */
+    .location-main {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 600px;
+    }
+    .loc-map-wrap { position: relative; background: var(--linen); }
+    .loc-map-wrap iframe {
+      width: 100%; height: 100%; min-height: 500px;
+      display: block; border: none;
+      filter: sepia(0.12) contrast(0.95) brightness(0.96);
+    }
+    .loc-info {
+      padding: 80px 64px;
+      background: var(--white);
+      display: flex; flex-direction: column; justify-content: center;
+      overflow-y: auto;
+    }
+    .loc-address {
+      font-size: 0.82rem; letter-spacing: 0.07em;
+      color: var(--mid); line-height: 1.9; margin: 22px 0;
+      border-left: 2px solid var(--gold); padding-left: 16px;
+    }
+
+    /* ── SPOTS GRID ── */
+    .spots-section { padding: 96px 56px; background: var(--cream); }
+    .spots-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; background: var(--border); margin-top: 52px;
+    }
+    .spot-cat { background: var(--cream); padding: 44px 36px; }
+    .spot-cat-icon { font-size: 1.6rem; margin-bottom: 14px; display: block; }
+    .spot-cat-title {
+      font-size: 0.65rem; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--gold);
+      font-weight: 400; margin-bottom: 18px;
+    }
+    .spot-list { list-style: none; }
+    .spot-list li {
+      font-size: 0.9rem; color: var(--mid); line-height: 1;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .spot-list li:last-child { border-bottom: none; }
+    .spot-list li::before {
+      content: ''; width: 4px; height: 4px;
+      border-radius: 50%; background: var(--stone); flex-shrink: 0;
+    }
+
+    /* ── DISTANCE STRIP ── */
+    .distance-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+    }
+    .dist-item {
+      padding: 36px 40px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .dist-item:last-child { border-right: none; }
+    .dist-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem; font-weight: 300;
+      color: var(--deep); line-height: 1; margin-bottom: 6px;
+    }
+    .dist-label {
+      font-size: 0.62rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--stone); font-weight: 400;
+    }
+
+    @media (max-width: 960px) {
+      .location-main { grid-template-columns: 1fr; }
+      .loc-map-wrap iframe { min-height: 340px; }
+      .loc-info { padding: 48px 24px; }
+      .spots-section { padding: 60px 24px; }
+      .spots-grid { grid-template-columns: 1fr; }
+      .distance-strip { grid-template-columns: 1fr 1fr; }
+      .dist-item:nth-child(2) { border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://content1.gillesdemunter.com/1027/listing_1027_1721474820_8952.jpg')"></div>
+  <div class="page-hero-content">
+    <span class="eyebrow">Kerobokan · Bali</span>
+    <h1>Location &amp;<br><em>Surroundings</em></h1>
+  </div>
+</div>
+
+<!-- DISTANCE STRIP -->
+<div class="distance-strip">
+  <div class="dist-item reveal"><div class="dist-val">5<span style="font-size:1.4rem">min</span></div><div class="dist-label">To the Beach</div></div>
+  <div class="dist-item reveal"><div class="dist-val">3<span style="font-size:1.4rem">min</span></div><div class="dist-label">To Revolver</div></div>
+  <div class="dist-item reveal"><div class="dist-val">10<span style="font-size:1.4rem">min</span></div><div class="dist-label">To Canggu</div></div>
+  <div class="dist-item reveal"><div class="dist-val">25<span style="font-size:1.4rem">min</span></div><div class="dist-label">To Seminyak</div></div>
+</div>
+
+<!-- MAP + INFO -->
+<div class="location-main">
+  <div class="loc-map-wrap">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.393!2d115.1468!3d-8.6733!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23d7590b09e0f%3A0x1f0f82ec9c0b2a52!2sKerobokan%20Kelod%2C%20North%20Kuta%2C%20Badung%20Regency%2C%20Bali!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
+      allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Villa Ocearn Location">
+    </iframe>
+  </div>
+  <div class="loc-info reveal">
+    <span class="eyebrow">Address</span>
+    <h2 class="section-title">Kerobokan,<br><em>Bali</em></h2>
+    <div class="divider"></div>
+    <p class="loc-address">
+      Jl. Bedugul No. Blok 28<br>
+      Kerobokan Kelod, Kec. Kuta Utara<br>
+      Kabupaten Badung, Bali 80361<br>
+      Indonesia
+    </p>
+    <p class="body-text">Kerobokan is one of Bali's most sought-after residential pockets — quiet enough to feel like a retreat, yet minutes from the best of Canggu and Seminyak's café culture, beach clubs, and lifestyle scene.</p>
+
+    <span class="nearby-lbl">Beaches</span>
+    <div class="tags">
+      <span class="tag">Batu Belig</span>
+      <span class="tag">Echo Beach</span>
+      <span class="tag">Berawa</span>
+      <span class="tag">Petitenget</span>
+    </div>
+
+    <span class="nearby-lbl">Dining &amp; Cafés</span>
+    <div class="tags">
+      <span class="tag">Revolver</span>
+      <span class="tag">Baked</span>
+      <span class="tag">Times Warung</span>
+    </div>
+
+    <span class="nearby-lbl">Wellness &amp; Lifestyle</span>
+    <div class="tags">
+      <span class="tag">Body Factory</span>
+      <span class="tag">Finns</span>
+      <span class="tag">Potato Head</span>
+      <span class="tag">Deus Ex Machina</span>
+    </div>
+  </div>
+</div>
+
+<!-- SPOTS DETAIL -->
+<section class="spots-section">
+  <div class="reveal">
+    <span class="eyebrow">What's Nearby</span>
+    <h2 class="section-title">The best of<br><em>Kerobokan &amp; Canggu</em></h2>
+  </div>
+  <div class="spots-grid">
+    <div class="spot-cat reveal">
+      <span class="spot-cat-icon">🏖</span>
+      <div class="spot-cat-title">Beaches</div>
+      <ul class="spot-list">
+        <li>Batu Belig Beach</li>
+        <li>Echo Beach</li>
+        <li>Berawa Beach</li>
+        <li>Petitenget Beach</li>
+        <li>Cemagi Beach</li>
+      </ul>
+    </div>
+    <div class="spot-cat reveal">
+      <span class="spot-cat-icon">☕</span>
+      <div class="spot-cat-title">Dining &amp; Cafés</div>
+      <ul class="spot-list">
+        <li>Revolver</li>
+        <li>Baked</li>
+        <li>Times Warung</li>
+        <li>Amolas Cafe</li>
+        <li>Desa Kitsune</li>
+        <li>Mauri Italian</li>
+      </ul>
+    </div>
+    <div class="spot-cat reveal">
+      <span class="spot-cat-icon">🧘</span>
+      <div class="spot-cat-title">Wellness &amp; Lifestyle</div>
+      <ul class="spot-list">
+        <li>Body Factory</li>
+        <li>Finns Beach Club</li>
+        <li>Potato Head</li>
+        <li>Deus Ex Machina</li>
+        <li>Desa Seni</li>
+        <li>Samadi</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="assets/components.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enquire — Villa Ocearn, Kerobokan Bali</title>
+  <meta name="description" content="Enquire about Villa Ocearn — available for yearly rental from September 2025 and for sale. Contact us via WhatsApp for full details.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/main.css">
+  <style>
+    /* Full-bleed enquiry hero */
+    .enq-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+    .enq-hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://content5.gillesdemunter.com/1027/listing_1027_1721475582_2373.jpg');
+      background-size: cover; background-position: center;
+      filter: brightness(0.26) saturate(0.7);
+      transition: transform 10s ease;
+    }
+    .enq-hero:hover .enq-hero-bg { transform: scale(1.03); }
+
+    .enq-hero-content {
+      position: relative; z-index: 2;
+      text-align: center; padding: 80px 24px;
+      max-width: 760px;
+    }
+    .enq-big-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 300; color: #fff; line-height: 0.92;
+      margin-bottom: 20px;
+    }
+    .enq-big-title em { font-style: italic; color: rgba(168,152,128,0.88); }
+    .enq-tagline {
+      font-size: 0.72rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: rgba(168,152,128,0.55);
+      margin-bottom: 40px; font-weight: 400;
+    }
+    .enq-status-line {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.63rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(168,152,128,0.6); border: 1px solid rgba(168,152,128,0.22);
+      padding: 9px 20px; margin-bottom: 48px; font-weight: 400;
+    }
+    .enq-status-line::before { content:''; width:6px; height:6px; border-radius:50%; background:#e8a040; }
+
+    /* Options cards */
+    .enq-options {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; margin-bottom: 48px;
+    }
+    .enq-opt {
+      background: rgba(250,248,245,0.07);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(168,152,128,0.18);
+      padding: 36px 32px;
+      text-align: left;
+    }
+    .enq-opt-icon { font-size: 1.5rem; margin-bottom: 14px; display: block; }
+    .enq-opt-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 300; color: #fff;
+      margin-bottom: 10px; line-height: 1.1;
+    }
+    .enq-opt-title em { font-style: italic; color: rgba(168,152,128,0.8); }
+    .enq-opt-desc {
+      font-size: 0.84rem; line-height: 1.68;
+      color: rgba(168,152,128,0.65);
+    }
+
+    /* CTA button area */
+    .enq-cta-area { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 18px 48px;
+      background: var(--cream); color: var(--deep);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.66rem; letter-spacing: 0.28em;
+      text-transform: uppercase; text-decoration: none;
+      font-weight: 400; transition: background 0.3s;
+    }
+    .btn-wa:hover { background: var(--linen); }
+    .enq-hint {
+      font-size: 0.6rem; letter-spacing: 0.16em;
+      color: rgba(168,152,128,0.4); text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    /* Quick facts strip */
+    .quick-facts {
+      background: var(--white);
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .qf-item {
+      padding: 36px 40px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .qf-item:last-child { border-right: none; }
+    .qf-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 300; color: var(--deep);
+      margin-bottom: 6px; line-height: 1;
+    }
+    .qf-label {
+      font-size: 0.62rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--stone); font-weight: 400;
+    }
+
+    @media (max-width: 760px) {
+      .enq-options { grid-template-columns: 1fr; }
+      .quick-facts { grid-template-columns: 1fr 1fr; }
+      .qf-item:nth-child(2) { border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<!-- ENQUIRY HERO (full page) -->
+<div class="enq-hero">
+  <div class="enq-hero-bg"></div>
+  <div class="enq-hero-content">
+    <span class="eyebrow" style="color:rgba(168,152,128,0.65);display:block;margin-bottom:20px">Get in Touch</span>
+    <h1 class="enq-big-title"><em>Villa Ocearn</em><br>awaits</h1>
+    <p class="enq-tagline">Yearly Rental &nbsp;·&nbsp; Available for Sale &nbsp;·&nbsp; Kerobokan, Bali</p>
+    <div>
+      <span class="enq-status-line">Currently rented · Available from September 2025</span>
+    </div>
+
+    <div class="enq-options">
+      <div class="enq-opt">
+        <span class="enq-opt-icon">🏠</span>
+        <h3 class="enq-opt-title">Yearly <em>Rental</em></h3>
+        <p class="enq-opt-desc">Long-term rental available from September 2025. Ideal for families or professionals relocating to Bali. Contact us for pricing.</p>
+      </div>
+      <div class="enq-opt">
+        <span class="enq-opt-icon">🔑</span>
+        <h3 class="enq-opt-title">For <em>Sale</em></h3>
+        <p class="enq-opt-desc">Leasehold property, 25 years remaining from Sept 2051. Contact us for full pricing and property documents.</p>
+      </div>
+    </div>
+
+    <div class="enq-cta-area">
+      <!-- Replace YOURPHONENUMBER with actual number e.g. 6281234567890 -->
+      <a href="https://wa.me/YOURPHONENUMBER?text=Hello%2C%20I%27m%20interested%20in%20Villa%20Ocearn%20in%20Kerobokan%2C%20Bali.%20Could%20you%20send%20me%20more%20details%3F"
+         target="_blank" rel="noopener" class="btn-wa">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.555 4.116 1.523 5.843L.057 23.5l5.815-1.524A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        Enquire via WhatsApp
+      </a>
+      <span class="enq-hint">We respond within 24 hours</span>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK FACTS -->
+<div class="quick-facts">
+  <div class="qf-item reveal"><div class="qf-val">5 BR</div><div class="qf-label">Bedrooms &amp; 5.5 Baths</div></div>
+  <div class="qf-item reveal"><div class="qf-val">720 m²</div><div class="qf-label">Land Area</div></div>
+  <div class="qf-item reveal"><div class="qf-val">2023</div><div class="qf-label">Year Built</div></div>
+  <div class="qf-item reveal"><div class="qf-val">25 yr</div><div class="qf-label">Lease Remaining</div></div>
+</div>
+
+<div id="footer-mount"></div>
+<script src="assets/components.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Villa Ocearn, Kerobokan Bali</title>
+  <meta name="description" content="Learn about Villa Ocearn — a brand-new modern glass villa in Kerobokan, Bali. 5 bedrooms, 720m² land, private pool, built 2023.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/main.css">
+  <style>
+    /* ── INTRO SPLIT ── */
+    .intro-split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 600px;
+    }
+    .intro-img { overflow: hidden; }
+    .intro-img img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 7s; }
+    .intro-img:hover img { transform: scale(1.04); }
+    .intro-copy {
+      padding: 88px 72px; background: var(--white);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    /* ── HIGHLIGHTS GRID ── */
+    .highlights {
+      padding: 96px 56px;
+      background: var(--cream);
+    }
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 52px;
+    }
+    .hl-item {
+      background: var(--cream);
+      padding: 44px 40px;
+    }
+    .hl-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem; font-weight: 300;
+      color: var(--gold); line-height: 1;
+      margin-bottom: 10px;
+    }
+    .hl-label {
+      font-size: 0.65rem; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--deep);
+      font-weight: 400; margin-bottom: 10px;
+    }
+    .hl-desc { font-size: 0.88rem; line-height: 1.7; color: var(--mid); }
+
+    /* ── STORY SECTION ── */
+    .story {
+      display: grid; grid-template-columns: 1fr 1fr;
+      background: var(--linen);
+    }
+    .story-img { overflow: hidden; min-height: 480px; }
+    .story-img img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 7s; }
+    .story-img:hover img { transform: scale(1.04); }
+    .story-copy {
+      padding: 88px 72px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    /* ── AVAILABILITY ── */
+    .availability {
+      padding: 96px 56px;
+      background: var(--white);
+    }
+    .avail-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; background: var(--border);
+      margin-top: 52px;
+    }
+    .avail-card {
+      background: var(--white);
+      padding: 52px 48px;
+    }
+    .avail-icon {
+      font-size: 1.6rem; margin-bottom: 18px;
+      display: block;
+    }
+    .avail-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 300;
+      color: var(--deep); margin-bottom: 14px; line-height: 1.1;
+    }
+    .avail-title em { font-style: italic; color: var(--warm); }
+    .avail-desc { font-size: 0.9rem; line-height: 1.78; color: var(--mid); margin-bottom: 24px; }
+
+    @media (max-width: 960px) {
+      .intro-split, .story { grid-template-columns: 1fr; }
+      .intro-img, .story-img { aspect-ratio: 16/9; min-height: auto; }
+      .intro-copy, .story-copy { padding: 48px 24px; }
+      .highlights { padding: 60px 24px; }
+      .highlights-grid { grid-template-columns: 1fr 1fr; }
+      .availability { padding: 60px 24px; }
+      .avail-grid { grid-template-columns: 1fr; }
+      .avail-card { padding: 40px 24px; }
+    }
+    @media (max-width: 540px) {
+      .highlights-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://content5.gillesdemunter.com/1027/listing_1027_1721523468_2959.jpg')"></div>
+  <div class="page-hero-content">
+    <span class="eyebrow">The Villa</span>
+    <h1>About <em>Villa Ocearn</em></h1>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-n">5</div><div class="stat-l">Bedrooms &amp; Baths</div></div>
+  <div class="stat"><div class="stat-n">720</div><div class="stat-l">Land Area m²</div></div>
+  <div class="stat"><div class="stat-n">470</div><div class="stat-l">Living Area m²</div></div>
+  <div class="stat"><div class="stat-n">2023</div><div class="stat-l">Year Built</div></div>
+</div>
+
+<!-- INTRO SPLIT -->
+<section class="intro-split">
+  <div class="intro-img">
+    <img src="https://content1.gillesdemunter.com/1027/listing_1027_1721523468_2959.jpg" alt="Villa Ocearn open living">
+  </div>
+  <div class="intro-copy reveal">
+    <span class="eyebrow">About the Villa</span>
+    <h2 class="section-title">Where glass meets<br><em>tropical living</em></h2>
+    <div class="divider"></div>
+    <p class="body-text">Built in 2023 in the serene pocket of Kerobokan, Villa Ocearn is a fully glazed contemporary villa where architecture dissolves the boundary between inside and out. Polished cement floors, double-height ceilings, and floor-to-ceiling glass panels frame the tropical landscape in every direction.</p>
+    <p class="body-text">Two levels. Five private suites. A chef's kitchen, entertainment room with pool table and bar, expansive pools, and private parking — all within walking distance of Bali's finest cafés and coastline.</p>
+    <span class="status-chip"><span class="status-dot"></span>Currently rented · Available from September</span>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<section class="highlights">
+  <div class="reveal">
+    <span class="eyebrow">Villa Highlights</span>
+    <h2 class="section-title">Everything<br>you <em>need</em></h2>
+  </div>
+  <div class="highlights-grid">
+    <div class="hl-item reveal">
+      <div class="hl-num">5</div>
+      <div class="hl-label">En-Suite Bedrooms</div>
+      <div class="hl-desc">Five private bedrooms, each with its own bathroom. The master suite features a bathtub and direct garden access.</div>
+    </div>
+    <div class="hl-item reveal">
+      <div class="hl-num">720</div>
+      <div class="hl-label">Land Area m²</div>
+      <div class="hl-desc">Generous plot with manicured tropical gardens, pool terrace, and private parking for multiple vehicles.</div>
+    </div>
+    <div class="hl-item reveal">
+      <div class="hl-num">2</div>
+      <div class="hl-label">Pool Areas</div>
+      <div class="hl-desc">A full swimming pool and a plunge pool set within the landscaped grounds — perfect for Bali mornings.</div>
+    </div>
+    <div class="hl-item reveal">
+      <div class="hl-num">2023</div>
+      <div class="hl-label">Brand New Build</div>
+      <div class="hl-desc">Contemporary architecture with polished cement floors, full air conditioning, and smart steel-glass design.</div>
+    </div>
+    <div class="hl-item reveal">
+      <div class="hl-num">2</div>
+      <div class="hl-label">Levels</div>
+      <div class="hl-desc">Upper and lower floors connected by a striking staircase, with panoramic glass walls on both levels.</div>
+    </div>
+    <div class="hl-item reveal">
+      <div class="hl-num">470</div>
+      <div class="hl-label">Living Area m²</div>
+      <div class="hl-desc">470 sqm of curated living space — open-plan living, chef's kitchen, entertainment room with bar and pool table.</div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story">
+  <div class="story-copy reveal">
+    <span class="eyebrow">Architecture</span>
+    <h2 class="section-title">Glass &amp; steel,<br><em>reimagined</em></h2>
+    <div class="divider"></div>
+    <p class="body-text">Villa Ocearn's design philosophy is rooted in radical openness. The glazed walls aren't just windows — they're the architecture. Steel-framed panels slide and fold, merging the interior with the garden in seconds.</p>
+    <p class="body-text">The polished concrete floors, warm timber ceilings, and natural stone accents ground the space, preventing it from feeling cold. The result is a home that feels both dramatic and deeply liveable.</p>
+    <a href="the-villa.html" class="btn-outline">Explore the Rooms →</a>
+  </div>
+  <div class="story-img">
+    <img src="https://content3.gillesdemunter.com/1027/listing_1027_1721523494_1969.jpg" alt="Villa Ocearn exterior">
+  </div>
+</section>
+
+<!-- AVAILABILITY -->
+<section class="availability">
+  <div class="reveal">
+    <span class="eyebrow">Availability</span>
+    <h2 class="section-title">Find your<br><em>arrangement</em></h2>
+  </div>
+  <div class="avail-grid">
+    <div class="avail-card reveal">
+      <span class="avail-icon">🏠</span>
+      <h3 class="avail-title">Yearly <em>Rental</em></h3>
+      <p class="avail-desc">Currently occupied on a yearly rental basis. Available from September 2025 for the next long-term tenant. Ideal for families or professionals relocating to Bali.</p>
+      <span class="status-chip"><span class="status-dot"></span>Available from September 2025</span>
+    </div>
+    <div class="avail-card reveal">
+      <span class="avail-icon">🔑</span>
+      <h3 class="avail-title">Available <em>for Sale</em></h3>
+      <p class="avail-desc">Villa Ocearn is simultaneously listed for sale. Leasehold property with 25 years remaining, located in a premium residential zone. Contact us for full pricing details.</p>
+      <a href="enquire.html" class="btn-outline" style="margin-top:8px">Enquire Now →</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="assets/components.js"></script>
+</body>
+</html>

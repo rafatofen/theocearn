@@ -118,10 +118,15 @@
       font-weight: 300; color: var(--stone); line-height: 1;
       opacity: 0.35; display: block; margin-bottom: -8px;
     }
-    .gp-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 3px; }
+    .gp-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 0; }
     .gp-grid div { overflow: hidden; }
     .gp-grid img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.6s; }
     .gp-grid div:hover img { transform: scale(1.06); }
+    .loc-preview { display: grid; grid-template-columns: 1fr 1fr; background: var(--white); }
+    .loc-preview-img { overflow: hidden; min-height: 460px; }
+    .loc-preview-img img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 7s; }
+    .loc-preview-img:hover img { transform: scale(1.04); }
+    .loc-preview-copy { padding: 80px 72px; display: flex; flex-direction: column; justify-content: center; }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(22px); }
@@ -143,6 +148,9 @@
       .gp-inner { grid-template-columns: 1fr; }
       .gp-left { padding: 56px 24px; order: 2; }
       .gp-grid { order: 1; min-height: 280px; }
+      .loc-preview { grid-template-columns: 1fr; }
+      .loc-preview-img { min-height: 280px; aspect-ratio: 16/9; }
+      .loc-preview-copy { padding: 48px 24px; }
     }
   </style>
 </head>
@@ -262,6 +270,37 @@
     </div>
   </div>
 </section>
+
+<!-- LOCATION PREVIEW -->
+<section class="loc-preview">
+  <div class="loc-preview-img">
+    <img src="https://content1.gillesdemunter.com/1027/listing_1027_1721474820_8952.jpg" alt="Kerobokan Bali">
+  </div>
+  <div class="loc-preview-copy reveal">
+    <span class="eyebrow">Location</span>
+    <h2 class="section-title">Kerobokan,<br><em>Bali</em></h2>
+    <div class="divider"></div>
+    <p class="body-text">Nestled in one of Bali's most sought-after residential pockets — quiet and serene, yet minutes from the best of Canggu and Seminyak.</p>
+    <div style="margin:16px 0 24px">
+      <span class="nearby-lbl" style="margin-top:0">Dining &amp; Cafés</span>
+      <div class="tags"><span class="tag">Revolver</span><span class="tag">Baked</span><span class="tag">Times Warung</span></div>
+      <span class="nearby-lbl">Wellness</span>
+      <div class="tags"><span class="tag">Body Factory</span><span class="tag">Finns</span><span class="tag">Potato Head</span></div>
+    </div>
+    <a href="location.html" class="btn-outline">View Full Map →</a>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div style="position:relative;overflow:hidden;min-height:52vh;display:flex;align-items:center;justify-content:center">
+  <div style="position:absolute;inset:0;background-image:url('https://content5.gillesdemunter.com/1027/listing_1027_1721475582_2373.jpg');background-size:cover;background-position:center;filter:brightness(0.26) saturate(0.7)"></div>
+  <div style="position:relative;z-index:2;text-align:center;padding:80px 24px">
+    <span class="eyebrow" style="color:rgba(200,185,154,0.65)">Get in Touch</span>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,5.5rem);font-weight:300;color:#fff;line-height:1;margin-bottom:14px"><em style="font-style:italic;color:rgba(200,185,154,0.85)">Villa Ocearn</em> awaits</h2>
+    <p style="font-size:0.7rem;letter-spacing:0.26em;text-transform:uppercase;color:rgba(200,185,154,0.5);margin-bottom:36px;font-weight:400">Yearly Rental &nbsp;·&nbsp; Available for Sale</p>
+    <a href="enquire.html" class="btn-main">Make an Enquiry →</a>
+  </div>
+</div>
 
 <div id="footer-mount"></div>
 <script src="assets/components.js"></script>

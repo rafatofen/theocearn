@@ -46,7 +46,7 @@
   </ul>
   <div class="foot-meta">
     <span class="foot-copy">© 2026 Villa Ocearn · Kerobokan, Bali</span>
-    <span class="foot-credit">Developed by <a href="https://rafaelthofehrn.com" target="_blank" rel="noopener">Rafael Thofehrn</a></span>
+    <span class="foot-credit">Developed by <a href="https://rafatofen.com" target="_blank" rel="noopener">Rafael Thofehrn</a></span>
   </div>
 </footer>`;
 

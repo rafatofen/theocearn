@@ -2,8 +2,8 @@
   <style>
     text {
       font-family: "Cormorant Garamond", serif;
-      font-size: 55px;
-      letter-spacing: -38px;
+      font-size: 64px;
+      letter-spacing: -25px;
       dominant-baseline: middle;
       text-anchor: middle;
       fill: black;
@@ -16,5 +16,5 @@
     }
   </style>
 
-  <text x="20%" y="58%">VO</text>
+  <text x="31%" y="60%">VO</text>
 </svg>
